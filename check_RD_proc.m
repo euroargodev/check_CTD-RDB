@@ -45,14 +45,17 @@ disp('---- sorting by date ----')
 sortdates(outfile)
 disp(['Data extraction is finished. Data is stored in ' outfile '.'])
 
-% 1a. plot data selected
-% IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-clrpl=[0 0 1];
-% IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-
+% 1a. Plot selected region
+disp('')
+disp('Ploting the selected WMO boxes')
+clrpl=[0 0 1];% plots in blue
 plot_wmoboxes(wmo,clrpl,1)
 plot_str=['RD_' ref '_' strrep(reg,' ','_') '_'];
-%eval(['export_fig -r300 ' plot_str '_zselbox.png'])
+
+q3=input('Want to save this plot? - Uses export_fig - yes(1) no (0) :');
+if q3==1
+    eval(['export_fig -r300 ' plot_str '_zselbox.png'])
+end
 
 %% 3. Calculations: Simple diagnostics
 % IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%

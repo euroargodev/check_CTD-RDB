@@ -46,7 +46,7 @@ if nargin==0
     pl=1;
     figsize=[1          45        1920        1089];
 elseif nargin <4
-    figsize=[1          45        1920        1089];a
+    figsize=[1          45        1920        1089];
 end
 
 if isfile('wmogrid.mat')==0
