@@ -258,14 +258,15 @@ projstr=['m_proj(' '''' 'Albers' '''' ',' '''' 'lon' '''' ',lonlimp,'...
     '''' 'lat' '''' ',latlimp)'];
 plot_str=['RD_' ref '_'];
 
+nout=cell(numel(wmo),1);
 for i=1:numel(wmo)
     box=num2str(wmo(i));
     fn=[indir 'ctd_' box '.mat'];
     if q6==1
-       plot_wmoboxprof(fn,ref,projstr,'off')
+       nout{i}=plot_wmoboxprof(fn,ref,projstr,'off');
        eval(['export_fig -r300 ' plot_str 'ctd_' box '.png'])
        close
     else
-       plot_wmoboxprof(fn,ref,projstr,'on')
+       nout{i}=plot_wmoboxprof(fn,ref,projstr,'on');
     end    
 end

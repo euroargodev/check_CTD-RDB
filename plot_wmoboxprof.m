@@ -1,5 +1,5 @@
-function plot_wmoboxprof(fn,ref,projstr,lonlimp,latlimp,figsize)
-if nargin<6
+function nout=plot_wmoboxprof(fn,ref,projstr,vis,lonlimp,latlimp,figsize)
+if nargin<7
     figsize=[1    6  863  635];
 end
 % ref= reference string for the RD
@@ -15,7 +15,7 @@ end
 wmosq=str2num(fn(end-7:end-4));
 lim=wmosquare(wmosq);
 %set projection
-if nargin<4
+if nargin<5
 lonlimp=lim(1:2)+[-1 1];
 latlimp=lim(3:4)+[-1 1];
 end
@@ -24,6 +24,7 @@ eval(projstr)
 
 % Load data
 load(fn);
+load(fn,'temp');
 % Convert long format
 long=convertlon(long,180);
       
@@ -37,7 +38,7 @@ if numel(nout)>0
 end
 
 % Figure
-figure('color','white','position',figsize,'visible','off')
+figure('color','white','position',figsize,'visible',vis)
 % sort by date
 [ans,IA]=sort(dates);
 
