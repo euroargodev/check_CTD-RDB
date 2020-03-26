@@ -24,15 +24,28 @@ if q1==1
 end
 
 %% 1. Extract data
+disp('')
+disp('********* EXTRACTING DATA FOR YOUR REGION OF INTEREST  *********')
 % IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
 ref='CTD2019v01';
-reg='Weddell Gyre';
-wmo =sort([3600:3602 5600:5606 3700:3702 5700:5706]);
+q2=input(['Please provide a vector with the number of the WMO boxes in your '...
+'region of interest (if empty will run with the example region (Weddell Gyre)):']);
+if isempty(q2)
+   q2=[3600:3602 5600:5606 3700:3702 5700:5706];
+   wmo =sort(q2);
+   reg='Weddell Gyre';
+ else
+   wmo =sort(q2);
+   reg = input(['Please provide a name for your region (to be used in file names): ']);
+ end
 % IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-
-outfile=extract_RD_wmolist(wmo,indir,reg,ref,fclue);
+disp('---- working on data extraction ----')
+outfile=extract_RD_wmolist(wmo,indir,reg,ref);
+disp('---- sorting by date ----')
 sortdates(outfile)
-% 2a. plot data selected
+disp(['Data extraction is finished. Data is stored in ' outfile '.'])
+
+% 1a. plot data selected
 % IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
 clrpl=[0 0 1];
 % IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
