@@ -247,20 +247,25 @@ plot_hist(MRP,binedges,bincent,1,xl,yl,ftsz);
 if q6==1
 eval(['export_fig -r300 ' plot_str '_chist3.png'])
 end
-close all
 
 %% Plot each box
-% IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-%m_proj('Albers','lon',lonlimp,'lat',latlimp)
+disp('|')
+disp('The following code will plot the content of each selected WMO box  ')
+q6=input('Want to skip viewing and save the WMO boxes plots (png)? - Uses export_fig - yes(1) no (0) :');
+
+
 projstr=['m_proj(' '''' 'Albers' '''' ',' '''' 'lon' '''' ',lonlimp,'...
     '''' 'lat' '''' ',latlimp)'];
 plot_str=['RD_' ref '_'];
-% IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-%
-% for i=1:numel(wmo)
-%     box=num2str(wmo(i));
-%     fn=[indir fclue box '.mat'];
-%     plot_wmoboxprof(fn,ref,projstr)
-%     eval(['export_fig -r300 ' plot_str fclue box '.png'])
-%     close
-% end
+
+for i=1:numel(wmo)
+    box=num2str(wmo(i));
+    fn=[indir 'ctd_' box '.mat'];
+    if q6==1
+       plot_wmoboxprof(fn,ref,projstr,'off')
+       eval(['export_fig -r300 ' plot_str 'ctd_' box '.png'])
+       close
+    else
+       plot_wmoboxprof(fn,ref,projstr,'on')
+    end    
+end
