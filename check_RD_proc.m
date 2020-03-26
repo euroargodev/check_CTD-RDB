@@ -68,9 +68,9 @@ lonlims=input('Longitude limits in degrees -180 to 180 [westernmost - to eastern
 step=input('Grid step in degrees (for both latitude and longitude)= ');
 
 if isempty(latlims)||isempty(lonlims)||isempty(step)
-  step=2.5;% grid size in degrees
-  latlims=[-90 -25];
-  lonlims=[-180 180];
+  step=2;% grid size in degrees
+  latlims=[-82 -58];
+  lonlims=[-72 32];
 end
 
 disp('Diagnostics are being calculated and added to the diagnostics mat file') 
