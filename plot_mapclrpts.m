@@ -1,5 +1,5 @@
 function h = plot_mapclrpts(X,Y,YY,bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz)
-if nargin<11
+if nargin<12
     figsize=[1          45        1920        1089];
 end
 figure('Color', 'w','Position', figsize);
