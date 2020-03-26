@@ -24,7 +24,7 @@ if q1==1
 end
 
 %% 1. Extract data
-disp('')
+disp('|')
 disp('********* EXTRACTING DATA FOR YOUR REGION OF INTEREST  *********')
 % IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
 ref='CTD2019v01';
@@ -46,7 +46,7 @@ sortdates(outfile)
 disp(['Data extraction is finished. Data is stored in ' outfile '.'])
 
 % 1a. Plot selected region
-disp('')
+disp('|')
 disp('Ploting the selected WMO boxes')
 clrpl=[0 0 1];% plots in blue
 plot_wmoboxes(wmo,clrpl,1)
@@ -59,7 +59,7 @@ end
 
 %% 2. Calculations: Simple diagnostics
 % 2a. Grid parameters
-disp('')
+disp('|')
 disp('Some of the following summarizing plots bin the data into a grid.')
 disp('Three parameters define the grid, its latitude and longitude limits and a grid step.')
 disp('Please provide the parameters (if one is empty will run with the example region)')
@@ -76,6 +76,7 @@ end
 disp('Diagnostics are being calculated and added to the diagnostics mat file') 
 infile=outfile;%or  name of the extracted mat file
 q4=input('Do you want to see the main outputs printed in the screen? yes (1): ');
+disp('|')
 outfile=RD_simplediag(infile,step,latlims,lonlims,q4);
 load(outfile)
 load(infile)
