@@ -3,9 +3,28 @@ clear variables;close all
 addpath([cd '\fx\'])
 % Ingrid Angel (BSH) 01.03.2019 (Matlab 2018)
 
+%% 0. Point the folder containing the DMQC Reference database
+q1=input(['Is the latest version of the DMQC CTD-RDB (2019v01) locally available? '...
+'yes (1) or no (0): ']);
+if q1==1
+   indir=input('Please provide the full path to the folder: ');
+ else
+   disp('The DMQC CTD-RDB (2019v01) will be downloaded (it takes a long time!)...')
+   disp('Please provide the login data')
+   login=input('Login: ');
+   passw=input('Password: ');
+   disp('Please provide the target folder ')
+   tardir=input('Please provide the full path to the target folder: ');
+   % info for download
+   address='ftp.ifremer.fr';
+   ftpdir='coriolis/CTD_for_DMQC/CTD_for_DMQC_2019V01/';
+   fclue='CTD_for_DMQC*';
+   extr=1;%extracts the tar.gz files
+   download_RD(address,login,passw,ftpdir,fclue,tardir,extr)
+end
+
 %% 1. Extract data
 % IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-indir= %'\\win.bsh.de\root$\Standard\Hamburg\Homes\Homes00\bm2186\Datenbanken\Downloaded\IFREMER\CTD_for_DMQC_2019V01\';
 ref='CTD2019v01';
 fclue='ctd_';
 reg='Weddell Gyre';
@@ -38,7 +57,7 @@ load(outfile)
 %% 4. Map Plots
 %Set projection: Using a projection string (projstr)
 % To create a projstr paste the m_proj(all) line of code in a
-% text editor. Use the find and replace function like this 
+% text editor. Use the find and replace function like this
 % find: '
 % replace: ' '''' '
 % and add a ' at the beginning and at the end (
@@ -151,7 +170,7 @@ projstr=['m_proj(' '''' 'Albers' '''' ',' '''' 'lon' '''' ',lonlimp,'...
     '''' 'lat' '''' ',latlimp)'];
 plot_str=['RD_' ref '_'];
 % IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-% 
+%
 % for i=1:numel(wmo)
 %     box=num2str(wmo(i));
 %     fn=[indir fclue box '.mat'];

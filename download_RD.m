@@ -9,8 +9,10 @@ for i=1:numel(files)
     tic
     mget(ftpobj,files(i).name,tardir)
     if ext==1
+        disp('... extracting data ...')
         gunzip([tardir files(i).name])
-        untar([tardir files(i).name(1:end-3)])
+        untar([tardir files(i).name(1:end-3)],tardir)
+        delete([tardir files(i).name(1:end-3)])
     end
 end
 toc
