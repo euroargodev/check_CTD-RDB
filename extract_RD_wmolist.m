@@ -1,4 +1,4 @@
-function outfile=extract_RD_wmolist(wmo,indir,reg,ref,fclue)
+function outfile=extract_RD_wmolist(wmo,indir,reg,ref)
 % Input
 % wmo: Vector with the numbers of the WMO boxes to be extracted
 % indir: Path to the RD .mat files
@@ -12,7 +12,7 @@ function outfile=extract_RD_wmolist(wmo,indir,reg,ref,fclue)
 % wmo =sort([3600:3602 5600:5606 3700:3702 5700:5706]);
 outfile=['RD_' ref '_' strrep(reg,' ','-') '.mat'];
 %  Ingrid Angel (BSH) 2019 (Matlab 2018)
-
+fclue='ctd_';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Preallocate size of output matrix (max number of press levels x profiles )
 % Get number of pressure levels and profiles in each box
