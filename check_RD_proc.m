@@ -80,30 +80,65 @@ outfile=RD_simplediag(infile,step,latlims,lonlims,q4);
 load(outfile)
 load(infile)
 
-%% 4. Map Plots
-%Set projection: Using a projection string (projstr)
-% To create a projstr paste the m_proj(all) line of code in a
+%% 3. Map Plots
+disp('|')
+% Set projection
+disp(['The following code will plot maps, it is necessary to provide a projection '...
+    'string for m_map'])
+
+% To create a projection string paste the entire m_proj line of code in a
 % text editor. Use the find and replace function like this
 % find: '
 % replace: ' '''' '
 % and add a ' at the beginning and at the end (
 % put all in brackets [])
-% polar projection SOARC
-%m_proj('stereographic','lat',-90,'long',0,'radius',65);
+% Ex. polar projection SOARC
+% m_proj('stereographic','lat',-90,'long',0,'radius',65);
+% becomes 
+% projstr=['m_proj(' '''' 'stereographic' '''' ',' '''' 'lat' '''' ',-90,' ...
+%    '''' 'long' '''' ',0,' '''' 'radius' '''' ',65);'];
 
-% IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-% projection settings
-projstr=['m_proj(' '''' 'stereographic' '''' ',' '''' 'lat' '''' ',-90,' ...
-    '''' 'long' '''' ',0,' '''' 'radius' '''' ',65);'];
-%grid map settings
-xt=[-70 30 150];
-yt=[-75 -60 -45 -30];
-% plot color-coded point maps
-bath=[-9000 -2000 -900 0];
-mksz=8;
+disp(' To create a projection string paste the entire m_proj line of code in a')
+disp([' For example ' 'm_proj(''stereographic'',''lat'',-90,''long'',0,''radius'',65)']);
+disp(' text editor. Use the find and replace function like this')
+disp(' find: '' ')
+disp(' replace: '''' ')
+disp(' and add a '' at the beginning and at the end, then put all in brackets []')
+disp(' See line 97 in this code for an example if needed')
+
+disp('|')
+% projstring
+projstr=input('Please provide the projection string: ');
+% Grid ticks
+xt=input('Provide the positions of the x-axis (longitude) ticks as a vector :');
+yt=input('Provide the positions of the y-axis (latitude) ticks as a vector :');
+
+if isempty(projstr)||isempty(xt)||isempty(yt)
+    disp (' projection values were incomplete... running with default values')
+    % projection settings
+    projstr=['m_proj(' '''' 'Albers' '''' ',' '''' 'lon' '''' ',lonlims,'...
+     '''' 'lat' '''' ',latlims)'];
+    %grid map settings
+    %grid ticks
+    xt=10*round(lonlims(1)/10):20:10*round(lonlims(2)/10);
+    yt=10*round(latlims(1)/10):10:10*round(latlims(2)/10);
+end
+
+% Bathymetry contours
+bath=input('Provide a vector with the bathymetry contours (m) to be plotted, [-9000 -2000 -900 0] is recommended): ');
+if isempty(bath)
+    bath=[-9000 -2000 -900 0];
+end
+% Marker size
+mksz=input('Marker Size for the color-coded plots (8 is recommended) :');
 % general fontsize
-ftsz=12;
-% IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
+ftsz=input('Font Size for plots (12 is recommended) :');
+if isempty(mksz)|| isempty(ftsz)
+    % marker size
+    mksz=8;
+    % general fontsize
+    ftsz=12;
+end
 
 % do projection
 eval(projstr)
