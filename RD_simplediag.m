@@ -1,11 +1,6 @@
-function outfile=RD_simplediag(infile,step,latlims,lonlims,lonfrmt)
+function outfile=RD_simplediag(infile,step,latlims,lonlims,vb,lonfrmt)
 
-% Define grid
-% step=2.5;
-% latlims=[-90 -25];
-% lonlims=[-180 185];
-% 
-if nargin<5
+if nargin<6
    lonfrmt=180;
 end
 % infile='RD_CTD2019v01_Weddell-Gyre.mat';
@@ -55,28 +50,31 @@ vars1= 'unix uniy ofs inds nprof latest incpf incp incpw ';
 vars2= 'MRP shallow NMIP';
 eval(['save ' outfile ' ' vars1 vars2 ]) 
 
-% disp('Simple diagnostic output ')
-% % out of range temperature
-% disp('Number of out of range temperature values')
-% disp(num2str(numel(ft)))
-% % out of range salinity
-% disp('Number of out of range salinity values')
-% disp(num2str(numel(fs)))
-% % number of incomplete PTS triplets
-% disp('Number of incomplete PTS triplets')
-% disp(num2str(numel(sum(incpf))))
-% % number of profiles with incomplete triplets
-% disp('Number of profiles with incomplete triplets values')
-% disp(num2str(numel(find(incp==1))))
-% % number of shallow profiles (MRP<900 db)
-% disp('Number of shallow profiles (MRP<900 db)')
-% disp(num2str(numel(find(shallow==1))))
-% % number of profiles containing more than one cast or with
-% % Non-monotonically increasing pressure
-% disp(['Number of profiles containing more than one cast or with '...
-% 'non-monotonically increasing pressure'])
-% disp(num2str(numel(NMIP)))
-
+if vb==1
+    disp('')
+    disp('Simple diagnostic output ')
+    % out of range temperature
+    disp('Number of out of range temperature values')
+    disp(num2str(numel(ft)))
+    % out of range salinity
+    disp('Number of out of range salinity values')
+    disp(num2str(numel(fs)))
+    % number of incomplete PTS triplets
+    disp('Number of incomplete PTS triplets')
+    disp(num2str(numel(sum(incpf))))
+    % number of profiles with incomplete triplets
+    disp('Number of profiles with incomplete triplets values')
+    disp(num2str(numel(find(incp==1))))
+    % number of shallow profiles (MRP<900 db)
+    disp('Number of shallow profiles (MRP<900 db)')
+    disp(num2str(numel(find(shallow==1))))
+    % number of profiles containing more than one cast or with
+    % Non-monotonically increasing pressure
+    disp(['Number of profiles containing more than one cast or with '...
+        'non-monotonically increasing pressure'])
+    disp(num2str(numel(NMIP)))
+    disp('')
+end
 outfile2=strrep(['SD_' infile],'.mat','.txt');
 
 fileID = fopen(outfile2, 'w');

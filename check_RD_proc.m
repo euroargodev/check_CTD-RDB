@@ -57,18 +57,29 @@ if q3==1
     eval(['export_fig -r300 ' plot_str '_zselbox.png'])
 end
 
-%% 3. Calculations: Simple diagnostics
-% IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
-% grid parameters
-step=2.5;% grid size in degrees
-latlims=[-90 -25];
-lonlims=[-180 185];
-infile=[plot_str '.mat'];
-% IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII%%
+%% 2. Calculations: Simple diagnostics
+% 2a. Grid parameters
+disp('')
+disp('Some of the following summarizing plots bin the data into a grid.')
+disp('Three parameters define the grid, its latitude and longitude limits and a grid step.')
+disp('Please provide the parameters (if one is empty will run with the example region)')
+latlims=input('Latitude limits in degrees -90 to 90 [southernmost nothernmost] = ');
+lonlims=input('Longitude limits in degrees -180 to 180 [westernmost - to easternmost +] = ');
+step=input('Grid step in degrees (for both latitude and longitude)= ');
 
-outfile=RD_simplediag(infile,step,latlims,lonlims);
-load(infile)
+if isempty(latlims)||isempty(lonlims)||isempty(step)
+  step=2.5;% grid size in degrees
+  latlims=[-90 -25];
+  lonlims=[-180 180];
+end
+
+disp('Diagnostics are being calculated and added to the diagnostics mat file') 
+infile=outfile;%or  name of the extracted mat file
+q4=input('Do you want to see the main outputs printed in the screen? yes (1): ');
+outfile=RD_simplediag(infile,step,latlims,lonlims,q4);
 load(outfile)
+load(infile)
+
 %% 4. Map Plots
 %Set projection: Using a projection string (projstr)
 % To create a projstr paste the m_proj(all) line of code in a
