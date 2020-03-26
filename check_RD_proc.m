@@ -210,6 +210,10 @@ eval(['export_fig -r300 ' plot_str '_bpointmap4.png'])
 end
 
 %% 5. Histogram plots
+disp('|')
+disp('The following code will plot histograms ')
+q6=input('Want to save the histogram plots (png)? - Uses export_fig - yes(1) no (0) :');
+
 % Hist 1
 % years
 binedges=[1970 1995:2019];
@@ -218,7 +222,9 @@ xl='Years';
 yl='Number of profiles';
 h=plot_hist(YY,binedges,bincent,0,xl,yl,ftsz);
 rep_xtick(h,'1995','<=1995')
+if q6==1
 eval(['export_fig -r300 ' plot_str '_chist1.png'])
+end
 
 % Hist2
 % months
@@ -227,7 +233,9 @@ bincent=1:12;
 xl='Months';
 yl='Number of profiles';
 plot_hist(MM,binedges,bincent,0,xl,yl,ftsz);
+if q6==1
 eval(['export_fig -r300 ' plot_str '_chist2.png'])
+end
 
 % Hist 3
 % MRP
@@ -236,7 +244,9 @@ bincent=1:numel(binedges)-1;
 xl='MRP intervals [db]';
 yl='Number of profiles';
 plot_hist(MRP,binedges,bincent,1,xl,yl,ftsz);
+if q6==1
 eval(['export_fig -r300 ' plot_str '_chist3.png'])
+end
 close all
 
 %% Plot each box
