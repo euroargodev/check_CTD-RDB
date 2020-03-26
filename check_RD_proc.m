@@ -141,6 +141,8 @@ if isempty(mksz)|| isempty(ftsz)
     ftsz=12;
 end
 
+q5=input('Want to save the map plots (png)? - Uses export_fig - yes(1) no (0) :');
+
 % do projection
 eval(projstr)
 
@@ -154,7 +156,9 @@ cblims=[0 100];
 cblevels=20;
 h = plot_mapgrid(unix,uniy,ofs,nprof,cblims,cblevels,xt,yt,ttl,ftsz);
 rep_ytick(h,'100','>100')
+if q5==1
 eval(['export_fig -r300 ' plot_str '_agridmap1.png'])
+end
 
 % Grid map 2
 ttl='Year of the latest profile per bin';
@@ -162,7 +166,9 @@ cblims=[1995 2019];
 cblevels=numel(1995:2019)-1;
 h = plot_mapgrid(unix,uniy,ofs,latest,cblims,cblevels,xt,yt,ttl,ftsz);
 rep_ytick(h,'1995','<1995')
+if q5==1
 eval(['export_fig -r300 ' plot_str '_agridmap2.png'])
+end
 
 % plot color-coded point maps
 % Point map 1
@@ -171,14 +177,18 @@ cblims=[1995 2019];
 cblevels=numel(1995:2019)-1;
 h = plot_mapclrpts(X,Y,YY,bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz);
 rep_ytick(h,'1995','<1995')
+if q5==1
 eval(['export_fig -r300 ' plot_str '_bpointmap1.png'])
+end
 
 % Point map 2
 ttl='Profile positions - MRP is color-coded';
 cblims=[500 4000];
 cblevels=numel(500:100:4000)-1;
 plot_mapclrpts(X,Y,MRP,bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz);
+if q5==1
 eval(['export_fig -r300 ' plot_str '_bpointmap2.png'])
+end
 
 % Point map 3
 ttl='Profile positions - MRP<900 is color-coded';
@@ -186,14 +196,18 @@ cblims=[0 1];
 cblevels=2;
 plot_mapclrpts(X,Y,shallow,bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz);
 colormap([0 0 1;1 0 0]);
+if q5==1
 eval(['export_fig -r300 ' plot_str '_bpointmap3.png'])
+end
 
 ttl='Profile positions - Presence of invalid samples color-coded';
 cblims=[0 1];
 cblevels=2;
 plot_mapclrpts(X,Y,incp,bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz);
 colormap([0 0 1;1 0 0]);
+if q5==1
 eval(['export_fig -r300 ' plot_str '_bpointmap4.png'])
+end
 
 %% 5. Histogram plots
 % Hist 1
