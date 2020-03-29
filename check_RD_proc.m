@@ -70,17 +70,20 @@ disp('********* CALCULATING DIAGNOSTICS  *********')
 disp('*')
 disp('Some of the following summarizing plots bin the data into a grid.')
 disp('Three parameters define the grid, its latitude and longitude limits and a grid step.')
-disp('Please provide the parameters (if one is empty will run with the example region)')
+disp('Please provide the parameters (if empty will run with the example region and/or step = 2)')
 disp('-@-@-')
 lonlims=input('Longitude limits in degrees -180 to 180 [westernmost - to easternmost +] : ');
 latlims=input('Latitude limits in degrees -90 to 90 [southernmost nothernmost] : ');
 step=input('Grid step in degrees (for both latitude and longitude): ');
 
-if isempty(latlims)||isempty(lonlims)||isempty(step)
-    step=2;% grid size in degrees
+if isempty(latlims)||isempty(lonlims)
     latlims=[-82 -58];
     lonlims=[-72 32];
 end
+if isempty(step)
+   step=2;% grid size in degrees
+end
+    
 
 disp('c[]')
 disp('Diagnostics are being calculated and added to the diagnostics mat file')
@@ -128,12 +131,13 @@ projstr=input('Please provide the projection string: ');
 xt=input('Provide the positions of the x-axis (longitude) ticks as a vector: ');
 yt=input('Provide the positions of the y-axis (latitude) ticks as a vector: ');
 
-if isempty(projstr)||isempty(xt)||isempty(yt)
-    disp (' projection values were incomplete... running with default values')
+if isempty(projstr)
+    disp (' projection values were incomplete... running with default Albert projection')
     % projection settings
-    projstr=['m_proj(' '''' 'Albers' '''' ',' '''' 'lon' '''' ',lonlims,'...
-        '''' 'lat' '''' ',latlims)'];
-    %grid map settings
+    projstr='m_proj(''Albers'',''lon'',lonlims,''lat'',latlims)';
+end
+
+if isempty(xt)||isempty(yt)
     %grid ticks
     xt=10*round(lonlims(1)/10):20:10*round(lonlims(2)/10);
     yt=10*round(latlims(1)/10):10:10*round(latlims(2)/10);
@@ -148,9 +152,11 @@ end
 mksz=input('Marker Size for the color-coded plots (default = 8 pts): ');
 % general fontsize
 ftsz=input('Font Size for plots (default = 12 pts): ');
-if isempty(mksz)|| isempty(ftsz)
+if isempty(mksz)
     % marker size
     mksz=8;
+end
+if isempty(ftsz)
     % general fontsize
     ftsz=12;
 end
