@@ -84,7 +84,6 @@ if isempty(step)
    step=2;% grid size in degrees
 end
     
-
 disp('c[]')
 disp('Diagnostics are being calculated and added to the diagnostics mat file')
 infile=outfile;%or  name of the extracted mat file

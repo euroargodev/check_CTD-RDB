@@ -29,9 +29,9 @@ isn=isn+isnan(TEMP);% nans in temp
 clear TEMP
 isn=isn+isnan(PRES);% nans in pres
 
+% Find incomplete triplets
 incpf=isn>0&isn<3;
 incp=sum(incpf,1);
-incpw=incp./sum(isn<3);
 
 % MRP
 % exclude incomplete samples
@@ -46,7 +46,7 @@ shallow=MRP<900;
 NMIP=unique(ic);
 
 outfile=['SD_' infile];
-vars1= 'unix uniy ofs inds nprof latest incpf incp incpw ';
+vars1= 'unix uniy ofs inds nprof latest incpf incp';
 vars2= 'MRP shallow NMIP';
 eval(['save ' outfile ' ' vars1 vars2 ]) 
 
@@ -61,7 +61,7 @@ if vb==1
     disp(num2str(numel(fs)))
     % number of incomplete PTS triplets
     disp('Number of incomplete PTS triplets')
-    disp(num2str(numel(sum(incpf))))
+    disp(num2str(numel(find(incpf>0))))
     % number of profiles with incomplete triplets
     disp('Number of profiles with incomplete triplets values')
     disp(num2str(numel(find(incp==1))))
@@ -88,7 +88,7 @@ fprintf(fileID,['Number of incomplete PTS triplets' '\n']);
 fprintf(fileID,[num2str(numel(sum(incpf))) '\n']);
 % number of profiles with incomplete triplets
 fprintf(fileID,['Number of profiles with incomplete triplets values' '\n']);
-fprintf(fileID,[num2str(numel(find(incp==1))) '\n']);
+fprintf(fileID,[num2str(numel(find(incp>0))) '\n']);
 % number of shallow profiles (MRP<900 db)
 fprintf(fileID,['Number of shallow profiles (MRP<900 db)'  '\n']);
 fprintf(fileID,[num2str(numel(find(shallow==1))) '\n']);
