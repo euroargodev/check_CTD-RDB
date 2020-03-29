@@ -16,8 +16,10 @@ wmosq=str2num(fn(end-7:end-4));
 lim=wmosquare(wmosq);
 %set projection
 if nargin<5
-lonlimp=lim(1:2)+[-1 1];
-latlimp=lim(3:4)+[-1 1];
+    lonlimp=lim(1:2)+[-1 1];
+    f=find(abs(lonlimp)>180);if isempty(f)==0; lonlimp(f)=lim(f);end
+    latlimp=lim(3:4)+[-1 1];
+    f=find(abs(latlimp)>90);if isempty(f)==0; latlimp(f)=lim(f+2);end
 end
 eval(projstr)
 

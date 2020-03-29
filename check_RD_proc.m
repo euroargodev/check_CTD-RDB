@@ -289,12 +289,16 @@ for i=1:numel(wmo)
     box=num2str(wmo(i));
     disp(['.... box ' box ' (' num2str(i) ' of ' num2str(numel(wmo)) ')'])
     fn=[indir 'ctd_' box '.mat'];
-    if q6==1
-        nout{i}=plot_wmoboxprof(fn,ref,projstr,'off');
-        eval(['export_fig -r300 ' plot_str 'ctd_' box '.png'])
-        close
+    if exist(fn,'file') ==2
+        if q6==1
+            nout{i}=plot_wmoboxprof(fn,ref,projstr,'off');
+            eval(['export_fig -r300 ' plot_str 'ctd_' box '.png'])
+            close
+        else
+            nout{i}=plot_wmoboxprof(fn,ref,projstr,'on');
+        end
     else
-        nout{i}=plot_wmoboxprof(fn,ref,projstr,'on');
+        disp('- this box does not exist - there are no profiles')
     end
 end
 disp('*')
