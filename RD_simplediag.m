@@ -46,7 +46,7 @@ shallow=MRP<900;
 NMIP=unique(ic);
 
 outfile=['SD_' infile];
-vars1= 'unix uniy ofs inds nprof latest incpf incp';
+vars1= 'unix uniy ofs inds nprof latest incpf incp ';
 vars2= 'MRP shallow NMIP';
 eval(['save ' outfile ' ' vars1 vars2 ]) 
 

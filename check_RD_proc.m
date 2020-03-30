@@ -50,6 +50,34 @@ disp('---- sorting by date ----')
 sortdates(outfile)
 disp(['Data extraction is finished. Data is stored in ' outfile '.'])
 
+% EXCLUDING REGIONS
+load(outfile,'LAT', 'LONG')
+disp('-@-@-')
+q2a=input(['How many exclusion polygons do you want to add?'...
+    '\n(profiles inside regions defined by them are not included in the diagnostics): ']);
+if q2a>0
+    for i=1:q2a
+        pol=addexcl_pol([min(LONG) max(LONG)],[min(LAT) max(LAT)]);
+        disp(['X points: ' mat2str(pol.ex)])
+        disp(['Y points: ' mat2str(pol.ey)])
+        if i==1
+            excl=find(inpolygon(LONG,LAT,pol.ex,pol.ey)==1);
+        else
+            f2=find(inpolygon(LONG,LAT,pol.ex,pol.ey)==1);
+            excl=union(excl,f2);
+        end
+        
+    end
+    if numel(excl)>0
+        disp('c[]')
+        disp('---- deleting profiles inside the polygons ----')
+        disp([num2str(numel(excl)) ' were deleted'])
+        excl_prof(outfile,outfile,excl)
+    else
+        disp(['No profiles inside the polygons'])
+    end
+end
+
 % 1a. Plot selected region
 disp('*')
 disp('Ploting the selected WMO boxes')
@@ -81,9 +109,9 @@ if isempty(latlims)||isempty(lonlims)
     lonlims=[-72 32];
 end
 if isempty(step)
-   step=2;% grid size in degrees
+    step=2;% grid size in degrees
 end
-    
+
 disp('c[]')
 disp('Diagnostics are being calculated and added to the diagnostics mat file')
 infile=outfile;%or  name of the extracted mat file
