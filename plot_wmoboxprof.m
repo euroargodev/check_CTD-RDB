@@ -53,16 +53,25 @@ m_elev('contour','color',[.7 .7 .7]);
 [lo,la]=corners(lim(1:2),lim(3:4));
 hw=m_line(lo,la,'color','b');
 % profile plots
-hp=m_scatter(long(IA),lat(IA),30,jet(size(pres,2)));
+dd=datesRD2vec(dates);
+hp=m_scatter(long(IA),lat(IA),30,dd(IA));
 set(hp,'marker','.');
+caxis([1995 2020]);colorbar
 axis square
 %hl=legend([hw hp(1)],'WMO-square','Reference data','location','northwestoutside');
+
+% find color for each plot
+v=dd;v(dd<=1994)=1995;
+map= parula;minv = 1995;maxv = max(v(:));
+ncol = size(map,1);
+s = round(1+(ncol-1)*(v-minv)/(maxv-minv));
+rgb_image = squeeze(ind2rgb(s,map));
 
 % TS-diagram:
 subplot 222
 tsdiagrm(mima(sal),mima(temp),0);
 hTS=line(sal(:,IA),temp(:,IA),'marker','.','linestyle','none');
-set(hTS,{'color'},num2cell(jet(size(pres,2)),2));
+set(hTS,{'color'},num2cell(rgb_image(IA,:),2));
 title({['n = ' num2str(numel(dates))],...
     [num2str(numel(nout)),' profiles outside the box']});
 
@@ -71,11 +80,11 @@ title({['n = ' num2str(numel(dates))],...
 subplot 223
 hT=line(pres(:,IA),temp(:,IA));
 view([90 90]);grid;set(gca,'yaxislocation','right');
-set(hT,{'color'},num2cell(jet(size(pres,2)),2));
+set(hT,{'color'},num2cell(rgb_image(IA,:),2));
 xlabel Pressure; ylabel Temperature
 % Salinity
 subplot 224
 hS=plot(pres(:,IA),sal(:,IA));
 view([90 90]);grid;set(gca,'yaxislocation','right');
-set(hS,{'color'},num2cell(jet(size(pres,2)),2));
+set(hS,{'color'},num2cell(rgb_image(IA,:),2));
 xlabel Pressure; ylabel Salinity
