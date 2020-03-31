@@ -1,6 +1,4 @@
 clear variables;close all
-% toolboxes of otheres used by this repository
-addpath([cd '\fx\'])
 % Ingrid Angel (BSH) 01.03.2019 (Matlab 2018)
 
 %% 0. Point the folder containing the DMQC Reference database
