@@ -4,7 +4,9 @@ if nargin<11
 end
 figure('Color', 'w','Position', figsize);
 set(gcf,'color','w')
-m_pcolor(unix(1:end-1)+ofs,uniy(1:end-1)+ofs,tdistn)
+% half point grid offset for pcolor(see m_map user guide)
+hfpo=mean(diff(unix))/2;
+m_pcolor(unix(1:end-1)+ofs-hfpo,uniy(1:end-1)+ofs+hfpo,tdistn)
 caxis(cblims)
 m_coast('patch',[.7 .7 .7],'edgecolor','k');
 m_grid('xtick',xt,'ytick',yt,'XaxisLocation','bottom','tickdir','out');
