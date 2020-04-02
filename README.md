@@ -28,6 +28,8 @@ Added by the user in the command window
   - Font Size for plots
 
 ## Output
+Some of the outputs for the Weddell Sea can be downloaded here: https://filebox.bsh.de/index.php/s/HuR8EAKbcE4YeEY
+
   - RD_CTD2019v01_<region name>.mat containing all data selected.
   - SD_RD_CTD2019v01_<region name>.mat and SD_RD_CTD2019v01_<region name>.txt
     containing the output of the diagnostic test
@@ -41,7 +43,7 @@ Added by the user in the command window
     - Histograms: 'Number of profiles per year', 'Number of profiles per month',
       'Number of profiles per MRP intervals [db]';
     - Data for each boxes: One plot per box containing Profile positions (with
-      color-coded year), Temperature and Salinity profiles and a TS diagram
+      color-coded year), Temperature and Salinity profiles and a TS diagram.
 
 ## Requirements (data)
 - Full path to the folder containing the reference database OR
@@ -60,4 +62,4 @@ Added by the user in the command window
 	https://www.mathworks.com/matlabcentral/fileexchange/23629-export_fig
 - finput
 	https://www.mathworks.com/matlabcentral/fileexchange/49727-finput
-- Jan Even Nilsen's functions (https://github.com/evenrev1/evenmat): mima.m and wmosquare.m 
+- Jan Even Nilsen's functions (https://github.com/evenrev1/evenmat): mima.m and wmosquare.m
