@@ -32,6 +32,8 @@ load(fn);
 load(fn,'temp');
 % Convert long format
 long=convertlon(long,180);
+% Number of profiles
+N=numel(long);
 
 % Calculate WMO number
 wmoc=pos2wmo(lat,long);
@@ -59,17 +61,19 @@ hw=m_line(lo,la,'color','b');
 dd=datesRD2vec(dates);
 hp=m_scatter(long(IA),lat(IA),30,dd(IA));
 set(hp,'marker','.');
-caxis([1995 2020]);colorbar
+caxis([1995 2019]);colorbar
 axis square
 %hl=legend([hw hp(1)],'WMO-square','Reference data','location','northwestoutside');
 
 % find color for each plot
 v=dd;v(dd<=1994)=1995;
-map= parula;minv = 1995;maxv = max(v(:));
+map= parula;minv = 1995;maxv = 2019;
 ncol = size(map,1);
 s = round(1+(ncol-1)*(v-minv)/(maxv-minv));
 rgb_image = squeeze(ind2rgb(s,map));
-
+if N==1;
+    rgb_image=rgb_image';
+end
 % TS-diagram:
 subplot 222
 tsdiagrm(mima(sal),mima(temp),0);
