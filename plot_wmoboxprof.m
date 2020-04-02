@@ -2,6 +2,9 @@ function nout=plot_wmoboxprof(fn,ref,projstr,vis,lonlimp,latlimp,figsize)
 if nargin<7
     figsize=[1    6  863  635];
 end
+% The original version of this function was provided by Jan Even Nilsen
+% I did some modifications but I am not sure which ones
+
 % ref= reference string for the RD
 % it calls the toolbox OCEAN
 % (https://github.com/dcherian/tools/tree/master/oceanography/OCEANS)
@@ -29,12 +32,12 @@ load(fn);
 load(fn,'temp');
 % Convert long format
 long=convertlon(long,180);
-      
+
 % Calculate WMO number
 wmoc=pos2wmo(lat,long);
 % Check if there are positions outside the wmo box
 nout=find(wmoc~= wmosq);
-if numel(nout)>0  
+if numel(nout)>0
     disp(['In box ' num2str(wmosq)])
     disp(['There are ',num2str(numel(nout)),'-positions outside the WMO-square ',int2str(wmosq),' !'])
 end
@@ -47,7 +50,7 @@ figure('color','white','position',figsize,'visible',vis)
 % Map
 subplot 221;
 title({[ref,' - in WMO-square ',int2str(wmosq)],'Time is color-coded'});
-m_grid; m_coast('patch',[.8 .8 .8]); 
+m_grid; m_coast('patch',[.8 .8 .8]);
 m_elev('contour','color',[.7 .7 .7]);
 % wmo box line
 [lo,la]=corners(lim(1:2),lim(3:4));
