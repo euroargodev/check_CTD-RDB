@@ -28,10 +28,10 @@ Added by the user in the command window
   - Font Size for plots
 
 ## Output
-Some of the outputs for the Weddell Sea can be downloaded here: https://filebox.bsh.de/index.php/s/HuR8EAKbcE4YeEY
+Some of the outputs for the Weddell Sea can be downloaded here: https://filebox.bsh.de/index.php/s/Q6fRvTjmSwuC0UM
 
-  - RD_CTD2019v01_<region name>.mat containing all data selected.
-  - SD_RD_CTD2019v01_<region name>.mat and SD_RD_CTD2019v01_<region name>.txt
+  - RD_CTD2019v01_*region name*.mat containing all data selected.
+  - SD_RD_CTD2019v01_*region name*.mat and SD_RD_CTD2019v01_*region name*.txt
     containing the output of the diagnostic test
   - Figures (saving the plots is optional)
     - World Map with all WMO boxes. Selected boxes are highlighted.
