@@ -64,7 +64,7 @@ if q2a>0
             f2=find(inpolygon(LONG,LAT,pol.ex,pol.ey)==1);
             excl=union(excl,f2);
         end
-        
+
     end
     if numel(excl)>0
         disp('c[]')
@@ -271,6 +271,9 @@ disp('---- ploting histograms ----')
 % years
 binedges=[1970 1995:2019];
 bincent=1995:2019;
+binedges=[1970 1995.5:2020];
+bincent=1995:2019;
+
 xl='Years';
 yl='Number of profiles';
 h=plot_hist(YY,binedges,bincent,0,xl,yl,ftsz);
