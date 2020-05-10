@@ -3,7 +3,7 @@ inds=cell(numel(uniy)-1,numel(unix)-1);
 nprof=nan(numel(uniy)-1,numel(unix)-1);
 for i=1:numel(unix)-1
     for j=1:numel(uniy)-1
-        inds{j,i}=find(LONG>unix(i)&LONG<=unix(i+1)&LAT>uniy(j)&LAT<=uniy(j+1));
+        inds{j,i}=find(LONG>=unix(i)&LONG<unix(i+1)&LAT>=uniy(j)&LAT<uniy(j+1));
         if numel(inds{j,i})>0
             nprof(j,i)=numel(inds{j,i});
         else

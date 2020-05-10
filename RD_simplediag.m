@@ -7,6 +7,8 @@ end
 eval(['load ' infile ' DATES YY DD MI MM LAT LONG QCLEVEL SOURCE PROF PRES'])
 
 LONG=convertlon(LONG,lonfrmt);
+latlims(2)=latlims(2)+step;
+lonlims(2)=lonlims(2)+step;
 % define grid
 [unix,uniy,ofs]=set_grid(lonlims,latlims,step);
 

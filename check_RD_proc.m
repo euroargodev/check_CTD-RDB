@@ -202,7 +202,7 @@ plot_str=['RD_' ref '_' strrep(reg,' ','_') '_'];
 ttl='Number of profiles per bin';
 cblims=[0 100];
 cblevels=20;
-h = plot_mapgrid(unix,uniy,ofs,nprof,cblims,cblevels,xt,yt,ttl,ftsz);
+h = plot_mapgrid(unix,uniy,nprof,cblims,cblevels,xt,yt,ttl,ftsz);
 rep_ytick(h,'100','>100')
 if q5==1
     eval(['export_fig -r300 ' plot_str '_agridmap1.png'])
@@ -212,7 +212,7 @@ end
 ttl='Year of the latest profile per bin';
 cblims=[1995 2019];
 cblevels=numel(1995:2019)-1;
-h = plot_mapgrid(unix,uniy,ofs,latest,cblims,cblevels,xt,yt,ttl,ftsz);
+h = plot_mapgrid(unix,uniy,latest,cblims,cblevels,xt,yt,ttl,ftsz);
 rep_ytick(h,'1995','<1995')
 if q5==1
     eval(['export_fig -r300 ' plot_str '_agridmap2.png'])
