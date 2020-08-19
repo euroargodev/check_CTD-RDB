@@ -1,4 +1,4 @@
-# Checking the status of the CTD Reference database (RDB)
+# Checking the status of the CTD Reference database (RDB) for Argo DMQC
 
 To perform an adequate Argo Salinity DMQC is necessary to use reference databases with appropriate temporal and spatial coverage. The CTD-RDB is maintained and updated by Coriolis operational services (IFREMER). To guarantee the high quality of the data, the CTD-RDB users (DMQC operators)
 are encouraged to perform a local audit for their region of interest and provide feedback in case they encounter errors, suspicious data, large temporal gaps, etc.
