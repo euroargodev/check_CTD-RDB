@@ -64,6 +64,8 @@ Some of the outputs for the Weddell Sea can be downloaded here: https://filebox.
 	https://www.mathworks.com/matlabcentral/fileexchange/49727-finput
 - tsdiagrm
 	http://www.ccpo.odu.edu/~klinck/SOGLOBEC/cruise/graphics/matlab/tsdiagram.m
+- swfreezt
+	http://read.pudn.com/downloads336/sourcecode/math/1472060/oceans/swfreezt.m__.htm
 - Jan Even Nilsen's functions (https://github.com/evenrev1/evenmat): mima.m and wmosquare.m
 
 ## Funding
