@@ -54,7 +54,7 @@ Some of the outputs for the Weddell Sea can be downloaded here: https://filebox.
 - Ingrid Angel's utility functions
   https://github.com/imab4bsh/imab
 - OCEANS
-	http://mooring.ucsd.edu/software/matlab/mfiles/toolbox/.download/ocean_download.zip
+	https://github.com/modscripps/gridMooringData/tree/master/misc/Oceanography%20toolbox
 - m_map
 	https://www.eoas.ubc.ca/~rich/map.html
 - export_fig to save figures
@@ -62,10 +62,6 @@ Some of the outputs for the Weddell Sea can be downloaded here: https://filebox.
 	https://www.mathworks.com/matlabcentral/fileexchange/23629-export_fig
 - finput
 	https://www.mathworks.com/matlabcentral/fileexchange/49727-finput
-- tsdiagrm
-	http://www.ccpo.odu.edu/~klinck/SOGLOBEC/cruise/graphics/matlab/tsdiagram.m
-- swfreezt
-	http://read.pudn.com/downloads336/sourcecode/math/1472060/oceans/swfreezt.m__.htm
 - Jan Even Nilsen's functions (https://github.com/evenrev1/evenmat): mima.m and wmosquare.m
 
 ## Funding
