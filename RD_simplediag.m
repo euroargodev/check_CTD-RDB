@@ -36,11 +36,12 @@ incpf=isn>0&isn<3;
 incp=sum(incpf,1);
 
 % MRP
+MRP=max(PRES,[],1);
 % exclude incomplete samples
-PRESC=PRES;PRESC(incpf)=NaN;
-MRP=max(PRESC,[],1);
+%PRESC=PRES;PRESC(incpf)=NaN;
+%MRP=max(PRESC,[],1);
 % MRP shallow flag
-shallow=MRP<900;
+shallow=MRP<0;
 
 % NMIP
 % Check for columns containing more than one profile
