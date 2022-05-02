@@ -7,7 +7,8 @@ set(gcf,'color','w')
 % half point grid offset for pcolor(see m_map user guide)
 m_pcolor(unix(1:end-1),uniy(1:end-1),tdistn)
 caxis(cblims)
-m_coast('patch',[.7 .7 .7],'edgecolor','k');
+%m_coast('patch',[.7 .7 .7],'edgecolor','k');
+m_gshhs_i('patch',[.7 .7 .7],'edgecolor','k');
 m_grid('xtick',xt,'ytick',yt,'XaxisLocation','bottom','tickdir','out');
 colormap(parula(cblevels))
 h=colorbar;

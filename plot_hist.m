@@ -15,7 +15,7 @@ end
 figure('Color', 'w','position',figsize);
 bar(bincent,N);
 if label==1
-    set(gca,'xticklabel',Xlabel)
+    set(gca,'xtick',bincent,'xticklabel',Xlabel)
 end
 h=gca;
 xlabel(xl);

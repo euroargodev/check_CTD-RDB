@@ -1,4 +1,4 @@
-function ctdrdb_status(indir,ref,q2,reg,lonlims,latlims,step,projstr,xt,yt,bath,mksz,ftsz,mrps)
+function ctdrdb_status(indir,ref,q2,reg,lonlims,latlims,step,projstr,xt,yt,bath,mksz,ftsz,mrps,MPRmin)
 
 % INDIR is the folder where the wmo boxes mat files are stored
 % indir='\\win.bsh.de\root$\Standard\Hamburg\Homes\Homes00\bm2286\CodeProjects\ices2mat\baltic_fmi\';
@@ -75,7 +75,7 @@ disp('c[]')
 disp('Diagnostics are being calculated and added to the diagnostics mat file')
 infile=outfile;%or  name of the extracted mat file
 
-outfile=RD_simplediag(infile,step,latlims,lonlims,1);% 1 sees plots
+outfile=RD_simplediag(infile,step,latlims,lonlims,MPRmin,1);% 1 sees plots
 load(outfile)
 load(infile)
 
@@ -97,21 +97,21 @@ disp('---- ploting maps ----')
 plot_str=['RD_' ref '_' strrep(reg,' ','_') '_'];
 % Grid map 1
 ttl='Number of profiles per bin';
-cblims=[0 100];
+cblims=[1 200];
 cblevels=20;
-h = plot_mapgrid(unix,uniy,nprof,cblims,cblevels,xt,yt,ttl,ftsz);
+h = plot_mapgrid(unx,uny,nprof,cblims,cblevels,xt,yt,ttl,ftsz);
 %rep_ytick(h,'100','>100')
 if q5==1
-    eval(['saveas(gcf,' '''' plot_str '_agridmap1.png' '''' ')'])
+    eval(['saveas(gcf,' '''' plot_str '_agridmap1_PROFN.png' '''' ')'])
 end
 
 % Grid map 2
 ttl='Year of the latest profile per bin';
 cblims=[min(YY) max(YY)];
 cblevels=numel(cblims(1):cblims(2))-1;
-h = plot_mapgrid(unix,uniy,latest,cblims,cblevels,xt,yt,ttl,ftsz);
+h = plot_mapgrid(unx,uny,latest,cblims,cblevels,xt,yt,ttl,ftsz);
 if q5==1
-   eval(['saveas(gcf,' '''' plot_str '_agridmap2.png' '''' ')'])
+   eval(['saveas(gcf,' '''' plot_str '_agridmap2_LATEST.png' '''' ')'])
 end
 
 % plot color-coded point maps
@@ -119,7 +119,7 @@ end
 ttl='Profile positions - year is color-coded';
 h = plot_mapclrpts(X,Y,YY,bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz);
 if q5==1
-    eval(['saveas(gcf,' '''' plot_str '_bpointmap1.png' '''' ')'])   
+    eval(['saveas(gcf,' '''' plot_str '_bpointmap1_YEAR.png' '''' ')'])   
 end
 
 % Point map 2
@@ -128,18 +128,18 @@ cblims=[mrps(1) mrps(end)];
 cblevels=numel(mrps)-1;
 plot_mapclrpts(X,Y,MRP,bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz);
 if q5==1
-   eval(['saveas(gcf,' '''' plot_str '_bpointmap2.png' '''' ')'])
+   eval(['saveas(gcf,' '''' plot_str '_bpointmap2_MRP.png' '''' ')'])
 end
 
-% Point map 3
-% ttl='Profile positions - MRP<900 is color-coded';
-% cblims=[0 1];
-% cblevels=2;
-% plot_mapclrpts(X,Y,shallow,bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz);
-% colormap([0 0 1;1 0 0]);
-% if q5==1
-%     eval(['export_fig -r300 ' plot_str '_bpointmap3.png'])
-% end
+%Point map 3
+ttl='Profile positions - many profiles in one are color-coded';
+cblims=[0 1];
+cblevels=2;
+plot_mapclrpts(X(NMIP==1),Y(NMIP==1),NMIP(NMIP==1),bath,mksz,cblims,cblevels,ttl,xt,yt,ftsz);
+colormap([1 0 0]);
+if q5==1
+ eval(['saveas(gcf,' '''' plot_str '_bpointmap3_NMIP.png' '''' ')'])
+end
 
 %% 5. Histogram plots
 %disp('*')
@@ -164,7 +164,7 @@ yl='Number of profiles';
 h=plot_hist(YY,binedges,bincent,0,xl,yl,ftsz);
 %rep_xtick(h,'1995','<=1995')
 if q6==1
-    eval(['saveas(gcf,' '''' plot_str '_chist1.png' '''' ')'])    
+    eval(['saveas(gcf,' '''' plot_str '_chist1_year.png' '''' ')'])    
 end
 % Hist2
 % months
@@ -174,17 +174,17 @@ xl='Months';
 yl='Number of profiles';
 plot_hist(MM,binedges,bincent,0,xl,yl,ftsz);
 if q6==1
-    eval(['saveas(gcf,' '''' plot_str '_chist2.png' '''' ')'])
+    eval(['saveas(gcf,' '''' plot_str '_chist2_month.png' '''' ')'])
 end
 
 % Hist 3
 % MRP
 %binedges=[0 900 1500 2000:1000:6000];
 binedges=mrps;% 0:10:200;
-bincent=1:numel(binedges)-1;
+bincent=mrps(2:end);
 xl='MRP intervals [db]';
 yl='Number of profiles';
 plot_hist(MRP,binedges,bincent,1,xl,yl,ftsz);
 if q6==1
-   eval(['saveas(gcf,' '''' plot_str '_chist3.png' '''' ')'])
+   eval(['saveas(gcf,' '''' plot_str '_chist3_mrp.png' '''' ')'])
 end

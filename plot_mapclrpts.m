@@ -4,7 +4,8 @@ if nargin<12
 end
 figure('Color', 'w','Position', figsize);
 m_etopo2('contour', bath,'color','k');
-m_coast('patch',[.7 .7 .7],'edgecolor','k');
+%m_coast('patch',[.7 .7 .7],'edgecolor','k');
+m_gshhs_i('patch',[.7 .7 .7],'edgecolor','k');
 % plot
 scatter(X,Y,mksz,YY,'filled')
 % format
