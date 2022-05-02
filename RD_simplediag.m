@@ -3,7 +3,6 @@ function outfile=RD_simplediag(infile,step,latlims,lonlims,vb,lonfrmt)
 if nargin<6
    lonfrmt=180;
 end
-% infile='RD_CTD2019v01_Weddell-Gyre.mat';
 eval(['load ' infile ' DATES YY DD MI MM LAT LONG QCLEVEL SOURCE PROF PRES'])
 
 LONG=convertlon(LONG,lonfrmt);
@@ -22,7 +21,7 @@ eval(['load ' infile ' TEMP SAL'])
 %consider only samples with valid pixels
 % check ranges
 ft=find(TEMP<-2.5|TEMP>40);
-fs=find(SAL<24|TEMP>41);
+fs=find(SAL<0|SAL>41);
 TEMP(ft)=NaN;SAL(fs)=NaN;
 % Incomplete pairs
 isn=isnan(SAL);% nans in sal
@@ -36,10 +35,9 @@ incpf=isn>0&isn<3;
 incp=sum(incpf,1);
 
 % MRP
-MRP=max(PRES,[],1);
 % exclude incomplete samples
-%PRESC=PRES;PRESC(incpf)=NaN;
-%MRP=max(PRESC,[],1);
+PRESC=PRES;PRESC(incpf)=NaN;
+MRP=max(PRESC,[],1);%MRP=max(PRES,[],1);
 % MRP shallow flag
 shallow=MRP<0;
 
