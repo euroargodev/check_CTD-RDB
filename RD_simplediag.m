@@ -1,6 +1,6 @@
-function outfile=RD_simplediag(infile,step,latlims,lonlims,vb,lonfrmt)
+function outfile=RD_simplediag(infile,step,latlims,lonlims,MPRmin,vb,lonfrmt)
 
-if nargin<6
+if nargin<7
    lonfrmt=180;
 end
 eval(['load ' infile ' DATES YY DD MI MM LAT LONG QCLEVEL SOURCE PROF PRES'])
@@ -9,11 +9,11 @@ LONG=convertlon(LONG,lonfrmt);
 latlims(2)=latlims(2)+step;
 lonlims(2)=lonlims(2)+step;
 % define grid
-[unix,uniy,ofs]=set_grid(lonlims,latlims,step);
+[unx,uny,ofs]=set_grid(lonlims,latlims,step);
 
 % get indices of profiles in each grid cell 
 % indices, number of profiles, year of latest profile
-[inds,nprof,latest]=prof_ingrid(unix,uniy,LONG,LAT,YY);
+[inds,nprof,latest]=prof_ingrid(unx,uny,LONG,LAT,YY);
 
 eval(['load ' infile ' TEMP SAL'])
 
@@ -39,15 +39,16 @@ incp=sum(incpf,1);
 PRESC=PRES;PRESC(incpf)=NaN;
 MRP=max(PRESC,[],1);%MRP=max(PRES,[],1);
 % MRP shallow flag
-shallow=MRP<0;
+shallow=MRP<MPRmin;
 
 % NMIP
 % Check for columns containing more than one profile
 [il,ic]=find((diff(PRES,[],1))<0);
-NMIP=unique(ic);
+NMIP=false(1,numel(LAT));
+NMIP(unique(ic))=1;
 
 outfile=['SD_' infile];
-vars1= 'unix uniy ofs inds nprof latest incpf incp ';
+vars1= 'unx uny ofs inds nprof latest incpf incp ';
 vars2= 'MRP shallow NMIP';
 eval(['save ' outfile ' ' vars1 vars2 ]) 
 
@@ -91,12 +92,11 @@ fprintf(fileID,[num2str(numel(sum(incpf))) '\n']);
 fprintf(fileID,['Number of profiles with incomplete triplets values' '\n']);
 fprintf(fileID,[num2str(numel(find(incp>0))) '\n']);
 % number of shallow profiles (MRP<900 db)
-fprintf(fileID,['Number of shallow profiles (MRP<900 db)'  '\n']);
+fprintf(fileID,['Number of shallow profiles (MRP<' num2str(MPRmin) ' db)'  '\n']);
 fprintf(fileID,[num2str(numel(find(shallow==1))) '\n']);
 % number of profiles containing more than one cast or with
 % Non-monotonically increasing pressure
 fprintf(fileID,['Number of profiles containing more than one cast or with '...
 'non-monotonically increasing pressure'  '\n']);
-fprintf(fileID,[num2str(numel(NMIP)) '\n']);
+fprintf(fileID,[num2str(numel(find(NMIP==1))) '\n']);
 fclose(fileID);
-

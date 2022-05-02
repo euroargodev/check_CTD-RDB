@@ -1,4 +1,4 @@
-%function ctdrdb_status(indir,ref,q2,reg,lonlims,latlims,step,projstr,xt,yt,bath,mksz,ftsz,mrps)
+function ctdrdb_status(indir,ref,q2,reg,lonlims,latlims,step,projstr,xt,yt,bath,mksz,ftsz,mrps)
 
 % INDIR is the folder where the wmo boxes mat files are stored
 % indir='\\win.bsh.de\root$\Standard\Hamburg\Homes\Homes00\bm2286\CodeProjects\ices2mat\baltic_fmi\';
@@ -52,32 +52,32 @@
 % mrps=0:10:200;
 
 %%
-% disp('c[]')
-% disp('---- working on data extraction ----')
-% wmo =sort(q2);
-% outfile=extract_RD_wmolist(wmo,indir,reg,ref);
-% disp('---- sorting by date ----')
-% sortdates(outfile)
-% disp(['Data extraction is finished. Data is stored in ' outfile '.'])
+disp('c[]')
+disp('---- working on data extraction ----')
+wmo =sort(q2);
+outfile=extract_RD_wmolist(wmo,indir,reg,ref);
+disp('---- sorting by date ----')
+sortdates(outfile)
+disp(['Data extraction is finished. Data is stored in ' outfile '.'])
 
-%% 1. Plot selected region
-% disp('*')
-% disp('Ploting the selected WMO boxes')
-% clrpl=[0 0 1];% plots in blue
-% plot_wmoboxes(wmo,clrpl,1)
-% plot_str=['RD_' ref '_' strrep(reg,' ','_') '_'];
-% eval(['saveas(gcf,' '''' plot_str '_zselbox.png' '''' ')'])
+% 1. Plot selected region
+disp('*')
+disp('Ploting the selected WMO boxes')
+clrpl=[0 0 1];% plots in blue
+plot_wmoboxes(wmo,clrpl,1)
+plot_str=['RD_' ref '_' strrep(reg,' ','_') '_'];
+eval(['saveas(gcf,' '''' plot_str '_zselbox.png' '''' ')'])
 
-%% 2. Calculations: Simple diagnostics
-% disp('*')
-% disp('********* CALCULATING DIAGNOSTICS  *********')
-% disp('c[]')
-% disp('Diagnostics are being calculated and added to the diagnostics mat file')
-% infile=outfile;%or  name of the extracted mat file
-% 
-% outfile=RD_simplediag(infile,step,latlims,lonlims,1);% 1 sees plots
-%load(outfile)
-%load(infile)
+% 2. Calculations: Simple diagnostics
+disp('*')
+disp('********* CALCULATING DIAGNOSTICS  *********')
+disp('c[]')
+disp('Diagnostics are being calculated and added to the diagnostics mat file')
+infile=outfile;%or  name of the extracted mat file
+
+outfile=RD_simplediag(infile,step,latlims,lonlims,1);% 1 sees plots
+load(outfile)
+load(infile)
 
 %% 3. Map Plots
 disp('*')
