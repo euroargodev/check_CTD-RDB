@@ -156,8 +156,8 @@ disp('---- ploting histograms ----')
 cblims=[min(YY) max(YY)];
 cblevels=numel(cblims(1):cblims(2))-1;
 
-binedges=min(YY):max(YY);
-bincent=min(YY)+0.5:1:max(YY);
+binedges=min(YY)-0.5:max(YY)+0.5;
+bincent=min(YY):max(YY);
 
 xl='Years';
 yl='Number of profiles';
