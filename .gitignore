@@ -1,0 +1,31 @@
+# subdirectories
+*/*
+
+# matlab file extensions
+*.mat
+*.fig
+
+# zip extensions
+*.zip
+
+# Netcdf extensions
+*.nc
+
+#text files
+*.txt
+
+# images
+*.png
+*.gif
+
+# excel extensions
+*.xls
+*.xlsx
+*.csv
+
+#external functions
+finput.m
+mima.m
+swfreezt.m
+swstate.m
+tsdiagrm.m
