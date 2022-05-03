@@ -54,7 +54,7 @@ Some of the outputs for the Weddell Sea can be downloaded here: https://filebox.
 - Ingrid Angel's utility functions
   https://github.com/imab4bsh/imab
 - OCEANS
-	http://mooring.ucsd.edu/software/matlab/mfiles/toolbox/.download/ocean_download.zip
+	https://github.com/modscripps/gridMooringData/tree/master/misc/Oceanography%20toolbox
 - m_map
 	https://www.eoas.ubc.ca/~rich/map.html
 - export_fig to save figures
