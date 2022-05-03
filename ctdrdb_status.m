@@ -157,7 +157,7 @@ cblims=[min(YY) max(YY)];
 cblevels=numel(cblims(1):cblims(2))-1;
 
 binedges=min(YY):max(YY);
-bincent=min(YY)+0.5:1:max(YY);
+bincent=min(YY)+0.5:1:max(YY)+0.5;
 
 xl='Years';
 yl='Number of profiles';
