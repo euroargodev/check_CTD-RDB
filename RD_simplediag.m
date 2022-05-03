@@ -74,7 +74,7 @@ if vb==1
     % Non-monotonically increasing pressure
     disp(['Number of profiles containing more than one cast or with '...
         'non-monotonically increasing pressure'])
-    disp(num2str(numel(NMIP)))
+     disp(num2str(numel(find(NMIP==1))))
     disp('')
 end
 outfile2=strrep(['SD_' infile],'.mat','.txt');
