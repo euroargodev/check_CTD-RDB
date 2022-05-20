@@ -4,6 +4,7 @@
 # matlab file extensions
 *.mat
 *.fig
+*.asv
 
 # zip extensions
 *.zip
