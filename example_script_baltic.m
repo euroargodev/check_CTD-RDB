@@ -1,15 +1,16 @@
-addpath(genpath('\\win.bsh.de\root$\Standard\Hamburg\Homes\Homes00\bm2286\CodeProjects\imab\'))
-addpath '\\win.bsh.de\root$\Standard\Hamburg\Homes\Homes00\bm2286\CTD-RDB-DMQC\check_RD\fx\OCEANS'
-addpath '\\win.bsh.de\root$\Standard\Hamburg\Homes\Homes00\bm2286\CodeProjects\matlab_toolboxes\m_map'
+addpath(genpath('H:\CodeProjects\imab\'))
+addpath 'H:\CodeProjects\CTD-RDB-DMQC\check_RD\fx\OCEANS'
+addpath 'H:\CodeProjects\CodeProjects\matlab_toolboxes\m_map'
 
 % INDIR is the folder where the wmo boxes mat files are stored
-indir='\\win.bsh.de\root$\Standard\Hamburg\Homes\Homes00\bm2286\CodeProjects\ices2mat\baltic_fmi\';
+%indir='\\win.bsh.de\root$\Standard\Hamburg\Homes\Homes00\bm2286\CodeProjects\ices2mat\baltic_fmi\';
+indir = 'H:\CodeProjects\baltic_ctdrb\baltic\A2\';
 % REF is a string that describes the reference database being analised
 ref='CTD4MarginalSeas';
 % Q2 is the vector with the number of the WMO boxes in your region of interest
 q2=[1500:1502 1601 1602];
 % REF is the name of the region (to be used in file names):
-reg='Baltic';
+reg='Baltic2022';
 % Grid parameters
 % Some of the following summarizing plots bin the data into a grid
 % Three parameters define the grid, its latitude and longitude limits and a grid step
