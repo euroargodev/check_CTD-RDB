@@ -49,10 +49,9 @@ LONG=nan(1,n2);
 QCLEVEL=cell(1,n2);
 SOURCE=cell(1,n2);
 PROF=nan(1,n2);
-
+WMO=nan(1,n2);
 % Loop throug all boxes
 for i=1:nw
-   
     % Get the profile index in the original matfile
     if i==1
         i1=1;i2=n(i,1);
@@ -60,6 +59,8 @@ for i=1:nw
         i1=sum(n(1:i-1,1))+1; i2=sum(n(1:i,1));
     end
     PROF(i1:i2)=1:n(i,1);
+    WMO(i1:i2)=repmat(wmo(i),1,n(i,1));
+    
     % mat file name
     infile=[indir 'ctd_' num2str(wmo(i)) '.mat'];
     % if the file exists, reads and stores the data
@@ -78,7 +79,7 @@ end
 
 % save first part of the file
 disp('saving vector variables')
-eval(['save ' outfile ' -v7.3 DATES LAT LONG QCLEVEL SOURCE PROF wmo indir YY MM DD MI'])
+eval(['save ' outfile ' -v7.3 DATES LAT LONG QCLEVEL SOURCE PROF WMO wmo indir YY MM DD MI'])
 toc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
